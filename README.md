@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Notion Clone (Udemy 学習用)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## このリポジトリについて
 
-Currently, two official plugins are available:
+Udemy 講座 **「React + TypeScript で超本格的な Notion クローンを作ろう」** の写経・学習用リポジトリです。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 講座を進めながら手を動かして実装するためのワークスペース
+- 個人学習が目的で、商用利用や Notion 公式サービスの再配布を意図したものではありません
 
-## React Compiler
+## 技術スタック
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| カテゴリ | 内容 |
+| --- | --- |
+| ライブラリ | React 19 (`^19.2.5`) / React DOM (`^19.2.5`) |
+| 言語 | TypeScript (`~6.0.2`) |
+| ビルドツール | Vite (`^8.0.10`) + `@vitejs/plugin-react` |
+| Lint | ESLint (`^10.2.1`) + `eslint-plugin-react-hooks` / `eslint-plugin-react-refresh` / `typescript-eslint` |
 
-## Expanding the ESLint configuration
+## セットアップ
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+前提: Node.js がインストールされていること。
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# 依存関係のインストール
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# 開発サーバー起動 (HMR 有効)
+npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# プロダクションビルド (型チェック + Vite ビルド)
+npm run build
+
+# ESLint 実行
+npm run lint
+
+# ビルド成果物のローカルプレビュー
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## React のバージョンに関する補足
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+講座では React **19.2.0** が使用されていますが、本リポジトリでは `^19.2.5` を採用しています。SemVer のマイナー互換のため、講座の内容を進める上で動作上の支障はない見込みです。
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+完全に講座と同じバージョンに固定したい場合は、以下のコマンドで合わせられます。
+
+```bash
+npm install react@19.2.0 react-dom@19.2.0 --save-exact
 ```
+
+## 注意書き
+
+本リポジトリは学習目的で作成されています。Notion は Notion Labs, Inc. の商標であり、本プロジェクトは Notion 公式とは一切関係ありません。
