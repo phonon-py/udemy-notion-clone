@@ -2,7 +2,7 @@ import api from "../../lib/api"
 import  { User } from "../users/user.entity";
 
 export const authRepository = {
-    async singup(
+    async signup(
         name: string, 
         email: string, 
         password: string
