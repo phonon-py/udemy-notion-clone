@@ -9,10 +9,20 @@ export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const signin = async () => {
-    const { user, token } = await authRepository.signin(email, password);
-    setCurrentUser(user);
+    setIsSubmitting(true);
+    try {
+      const { user, token } = await authRepository.signin(email, password);
+      setCurrentUser(user);
+      localStorage.setItem('token', token);
+    } catch (error) {
+      console.error(error);
+      alert('ログインに失敗しました。メールアドレスとパスワードを確認してください。');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (currentUser) return <Navigate to="/" replace />;
@@ -61,7 +71,7 @@ export default function Signin() {
               <div>
                 <button
                   onClick={signin}
-                  disabled={!email || !password}
+                  disabled={!email || !password || isSubmitting}
                   className='home-button'
                   style={{ width: '100%' }}
                 >
